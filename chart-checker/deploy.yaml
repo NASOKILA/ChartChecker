@@ -1,0 +1,42 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: chart-checker
+    name: chart-checker
+  name: chart-checker
+  namespace: chart-$ENVIRONMENT
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: chart-checker
+    spec:
+      containers:
+        - image: "jsretail.azurecr.io/chart-checker:$BUILD_ID"
+          name: chart-checker
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "150Mi"
+            requests:
+              cpu: "50m"
+              memory: "50Mi"
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      imagePullSecrets:
+        - name: jsretail-acr-pull
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chart-checker
+  namespace: chart-$ENVIRONMENT
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: chart-checker

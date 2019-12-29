@@ -1,0 +1,9 @@
+.productText {
+  position: relative;
+  left: 1rem;
+}
+
+.productElement {
+  text-align: left;
+  padding: 1rem;
+}
