@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { IconButton } from "@jsluna/button";
+import { IconButton, FilledButton } from "@jsluna/button";
 import { Container } from "@jsluna/grid";
 import { Plus } from "@jsluna/icons";
 import "./mainPage.css";
@@ -34,14 +34,13 @@ class MainPage extends Component<MainPagePropsType, MainPageStateType> {
   render() {
     return (
       <Container element="div" className="mainPage">
-        <IconButton
-          onClick={this.uploadImageToChart}
-          variant="filled"
-          label="Upload image of chart"
+        <FilledButton
           fullWidth
+          className="mainPageUploadBtn"
+          onClick={this.uploadImageToChart}
         >
-          <Plus />
-        </IconButton>
+          <Plus className="mainPageUploadPlus" /> Upload image of chart
+        </FilledButton>
       </Container>
     );
   }

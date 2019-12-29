@@ -1,3 +1,14 @@
 .mainPage {
   padding: 0rem 2rem;
+  text-align: center;
+}
+
+.mainPageUploadBtn {
+  margin: 1rem auto;
+  max-width: 25rem;
+  text-align: left;
+}
+
+.mainPageUploadPlus {
+  margin-right: 0.5rem;
 }
