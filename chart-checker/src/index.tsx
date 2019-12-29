@@ -43,9 +43,7 @@ const getApiHost = () => {
   } else {
     console.log(loggedInUserMSAL);
     localStorage.setItem("userObject", JSON.stringify(loggedInUserMSAL));
+    ReactDOM.render(<App />, document.getElementById("root"));
+    serviceWorker.unregister();
   }
 })();
-
-ReactDOM.render(<App />, document.getElementById("root"));
-
-serviceWorker.unregister();
