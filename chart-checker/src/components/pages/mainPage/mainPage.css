@@ -3,12 +3,26 @@
   text-align: center;
 }
 
-.mainPageUploadBtn {
-  margin: 1rem auto;
-  max-width: 25rem;
-  text-align: left;
+.mainPageCheckYourChartsBtn {
+  width: 15rem;
+  margin: 0.5rem 0rem;
+}
+
+.mainPageChangeYourChartsBtn {
+  width: 15rem;
+  margin: 0.5rem 0rem;
 }
 
 .mainPageUploadPlus {
   margin-right: 0.5rem;
+}
+
+.chartIcon {
+  margin: 3rem;
+}
+
+.mainPageHeader5Text {
+  max-width: 27rem;
+  margin: 0 auto;
+  margin-bottom: 2.5rem;
 }

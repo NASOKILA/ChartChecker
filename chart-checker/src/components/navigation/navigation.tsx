@@ -6,20 +6,40 @@ import { Sainsburys } from "@jsluna/images";
 import { Container } from "@jsluna/grid";
 import { Text } from "@jsluna/typography";
 import { logout } from "../../utils/auth";
+import $ from "jquery";
 import "./navigation.css";
 
 type NavigationProps = {};
 
 const Navigation: FunctionComponent = (props: NavigationProps) => {
   const [userName, setUserName] = useState("");
+  const [stores, setStores] = useState([]);
 
   const logoutUser = () => {
     logout();
   };
 
   useEffect(() => {
+    const stores = [
+      {
+        StoreCode: 2,
+        StoreName: "Stratford",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 3,
+        StoreName: "Pepper Hill",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 4,
+        StoreName: "Chertsey",
+        StoreLocalTimeZone: "GMT Standard Time"
+      }
+    ];
     const loggedInUser: string = String(localStorage.getItem("userObject"));
     const loggedInUserObject: any = JSON.parse(loggedInUser);
+
     const userName: string = loggedInUserObject.name;
     setUserName(userName);
   }, []);
@@ -50,11 +70,13 @@ const Navigation: FunctionComponent = (props: NavigationProps) => {
       }
       menuItems={[
         <Link to="/">Home</Link>,
-        <Link to="/chart/success">Chart Success</Link>,
-        <Link to="/chart/error">Chart Error</Link>,
-        <Link to="/chart/loading">Chart Loading</Link>,
-        <Link to="/notfound">Not Found</Link>,
-        <Link to="/unauthorized">Unauthorized</Link>
+        <Link to="/chart/check">Check a chart</Link>,
+        <Link to="/chart/change">Change a chart</Link>
+        // <Link to="/chart/success">Chart Success</Link>,
+        // <Link to="/chart/error">Chart Error</Link>,
+        // <Link to="/chart/loading">Chart Loading</Link>,
+        // <Link to="/notfound">Not Found</Link>,
+        // <Link to="/unauthorized">Unauthorized</Link>
       ]}
       topBar={{
         logo: (
@@ -63,8 +85,11 @@ const Navigation: FunctionComponent = (props: NavigationProps) => {
         meta: (
           <Container className="meta-content">
             <Text element="span" className="ln-u-soft-sm">
-              Signed in as {userName}
+              {userName} in StoreName (XXXX)
             </Text>
+            <Link to="/changestore" className="changeStoreLink">
+              Change store
+            </Link>
             <Text element="span" className="ln-u-soft-sm">
               <LinkButton
                 className="navigation-logout-button"

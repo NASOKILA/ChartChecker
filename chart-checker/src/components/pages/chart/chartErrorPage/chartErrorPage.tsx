@@ -3,8 +3,8 @@ import { Heading1, Heading3, Text } from "@jsluna/typography";
 import { Container } from "@jsluna/grid";
 import { IconButton } from "@jsluna/button";
 import { ArrowLeft, ErrorCircle } from "@jsluna/icons";
-import "./chartErrorPage.css";
 import Product from "../../../product/product";
+import "./chartErrorPage.css";
 
 type ChartErrorPagePropsType = {
   history: any;
@@ -70,14 +70,6 @@ class ChartErrorPage extends Component<
       type: "DVD",
       title: "Complete Paddington (box set)",
       newPosition: "New 4",
-      change: "",
-      oldPosition: ""
-    };
-
-    let product5: ProductType = {
-      type: "DVD",
-      title: "Only the Brave",
-      newPosition: "New 5",
       change: "",
       oldPosition: ""
     };

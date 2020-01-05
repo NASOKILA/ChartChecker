@@ -1,0 +1,42 @@
+.chartCheckPage {
+  text-align: center;
+  max-width: 17rem;
+}
+
+.listViewIcon {
+  font-size: 3rem;
+}
+
+.chartCheckerForm {
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid lightgray;
+  width: 100%;
+  width: 33rem;
+  position: relative;
+  right: 7.9rem;
+}
+
+.radioButtonField {
+  text-align: left;
+}
+
+.uploadImageBtn {
+  font-size: 1rem;
+  padding: 0rem 2rem;
+  margin: 1rem;
+}
+
+@media (max-width: 530px) {
+  .chartCheckerForm {
+    right: 4rem;
+    width: 25rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .chartCheckerForm {
+    width: 20rem;
+    right: 1.6rem;
+  }
+}
