@@ -8,19 +8,26 @@ import { Text } from "@jsluna/typography";
 import { logout } from "../../utils/auth";
 import $ from "jquery";
 import "./navigation.css";
+import { isLVal } from "@babel/types";
 
 type NavigationProps = {};
 
+type Store = {
+  StoreCode: number;
+  StoreName: string;
+  StoreLocalTimeZone: string;
+};
+
 const Navigation: FunctionComponent = (props: NavigationProps) => {
   const [userName, setUserName] = useState("");
-  const [stores, setStores] = useState([]);
+  const [selectedStoreName, setSelectedStoreName] = useState("");
 
   const logoutUser = () => {
     logout();
   };
 
   useEffect(() => {
-    const stores = [
+    let loadedStores: Array<Store> = [
       {
         StoreCode: 2,
         StoreName: "Stratford",
@@ -35,10 +42,85 @@ const Navigation: FunctionComponent = (props: NavigationProps) => {
         StoreCode: 4,
         StoreName: "Chertsey",
         StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 5,
+        StoreName: "Bath",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 6,
+        StoreName: "Chichester",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 7,
+        StoreName: "Eltham",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 8,
+        StoreName: "Colchester Avenue",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 9,
+        StoreName: "Pimlico",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 10,
+        StoreName: "Washington Cafe",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 11,
+        StoreName: "Lee Green",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 14,
+        StoreName: "East Ham",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 15,
+        StoreName: "East Grinstead",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 16,
+        StoreName: "Wimbledon",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 17,
+        StoreName: "Crayford",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 18,
+        StoreName: "Lords Hill",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 19,
+        StoreName: "Locksbottom",
+        StoreLocalTimeZone: "GMT Standard Time"
+      },
+      {
+        StoreCode: 20,
+        StoreName: "Tunbridge Wells",
+        StoreLocalTimeZone: "GMT Standard Time"
       }
     ];
+
     const loggedInUser: string = String(localStorage.getItem("userObject"));
     const loggedInUserObject: any = JSON.parse(loggedInUser);
+
+    loggedInUserObject.defaultStore = loadedStores[0];
+    setSelectedStoreName(loggedInUserObject.defaultStore.StoreName);
+    localStorage.setItem("userObject", JSON.stringify(loggedInUserObject));
 
     const userName: string = loggedInUserObject.name;
     setUserName(userName);
@@ -85,7 +167,10 @@ const Navigation: FunctionComponent = (props: NavigationProps) => {
         meta: (
           <Container className="meta-content">
             <Text element="span" className="ln-u-soft-sm">
-              {userName} in StoreName (XXXX)
+              {userName} in StoreName
+            </Text>
+            <Text element="span" id="selectedStoreNameInNavigation">
+              ({selectedStoreName})
             </Text>
             <Link to="/changestore" className="changeStoreLink">
               Change store

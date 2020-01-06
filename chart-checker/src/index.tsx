@@ -5,6 +5,12 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { applicationConfig, msal } from "./utils/auth";
 
+type Store = {
+  StoreCode: number;
+  StoreName: string;
+  StoreLocalTimeZone: string;
+};
+
 let baseUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
 
 const redirectUrlLocalStorageKey = "otter-frontend-redirectUrl";
@@ -41,7 +47,6 @@ const getApiHost = () => {
   if (!loggedInUserMSAL) {
     handleLogin();
   } else {
-    console.log(loggedInUserMSAL);
     localStorage.setItem("userObject", JSON.stringify(loggedInUserMSAL));
     ReactDOM.render(<App />, document.getElementById("root"));
     serviceWorker.unregister();
