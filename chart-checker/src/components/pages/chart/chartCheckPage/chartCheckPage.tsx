@@ -4,8 +4,10 @@ import { Container } from "@jsluna/grid";
 import { ListView } from "@jsluna/icons";
 import { Form, RadioButtonField } from "@jsluna/form";
 import { FilledButton } from "@jsluna/button";
+import * as backendApi from "../../../../api/backendApi";
 import axios from "axios";
 import "./chartCheckPage.css";
+import { functionDeclaration } from "@babel/types";
 
 type ChartCheckPagePropsType = {
   history: any;
@@ -56,17 +58,65 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
 
     const data2 = new FormData();
     data2.append("name", "Atanas");
+    const data3 = { Name: "Atanas" };
 
-    axios
-      .get(`https://localhost:5001/api/files`)
+    // fetch("https://localhost:5001/api/files", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify({
+    //     name: "yourValue"
+    //   })
+    // })
+    //   .then(res => {
+    //     debugger;
+    //     console.log("Success");
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     debugger;
+    //     console.log("Error");
+    //     console.log(err);
+    //   });
+
+    backendApi
+      .PostFormValues(data3)
       .then(res => {
-        console.log("success");
+        debugger;
+        console.log("Success");
         console.log(res);
       })
       .catch(err => {
-        console.log("error");
+        debugger;
+        console.log("Error");
         console.log(err);
       });
+
+    // backendApi
+    //   .GetValues()
+    //   .then(res => {
+    //     debugger;
+    //     console.log("Success");
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     debugger;
+    //     console.log("Error");
+    //     console.log(err);
+    //   });
+
+    // axios
+    //   .get(`https://localhost:5001/api/files`)
+    //   .then(res => {
+    //     console.log("success");
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log("error");
+    //     console.log(err);
+    //   });
 
     // const data3 = { name: "Atanas" };
     // axios
