@@ -1,0 +1,28 @@
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.depot-menu-list {
+  list-style-type: none;
+  font-weight: 100;
+}
+
+.navigation-logout-button {
+  background-color: white;
+}
+
+.barrier-control-link {
+  margin-right: 3rem;
+}
+
+.changeStoreLink {
+  font-weight: bold;
+  margin: 0rem 1rem;
+}
+
+@media (max-width: 719px) {
+  .meta-content > span {
+    display: block;
+    padding: 0rem 0rem 2rem 0rem !important;
+  }
+}

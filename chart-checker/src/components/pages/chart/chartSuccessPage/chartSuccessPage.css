@@ -1,0 +1,31 @@
+.chartSuccessPage {
+  text-align: center;
+  padding: 0rem 2rem;
+}
+
+.chartSuccessPageBackButtonContainer {
+  text-align: left;
+}
+
+.chartSuccessPageBackButton {
+  color: #4c4c4c;
+  padding-left: 0rem;
+}
+
+.chartSuccessPageLike {
+  font-size: 5rem;
+  background-color: #238634;
+  border-radius: 50%;
+  padding: 1rem;
+  color: white;
+  margin: 1rem 0rem;
+}
+
+.chartSuccessPageText {
+  font-size: larger;
+}
+
+.chartSuccessPageHomeBtn {
+  margin: 0rem auto;
+  max-width: 25rem;
+}
