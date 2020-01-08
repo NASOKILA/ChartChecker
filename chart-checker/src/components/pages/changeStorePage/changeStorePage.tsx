@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { Heading3 } from "@jsluna/typography";
 import { Container } from "@jsluna/grid";
-import { Select, Form } from "@jsluna/form";
-import { FilledButton } from "@jsluna/button";
+import { Select } from "@jsluna/form";
 import "./changeStorePage.css";
 
 type ChangeStorePagePropsType = {
@@ -37,6 +36,7 @@ const ChangeStorePage: FunctionComponent<ChangeStorePagePropsType> = props => {
       String(localStorage.getItem("userObject"))
     );
 
+    //Call API to get stores
     let loadedStores: Array<StoreType> = [
       {
         StoreCode: 2,
@@ -141,47 +141,34 @@ const ChangeStorePage: FunctionComponent<ChangeStorePagePropsType> = props => {
     setSelectedStoreName(loggedInUser.defaultStore.StoreName);
   }, []);
 
-  const handleFormSubmit = e => {
-    e.preventDefault();
+  const storeOnChangeHandler = e => {
+    let selectedStoreStringName: string = e.target.value;
+
     const loggedInUser: any = JSON.parse(
       String(localStorage.getItem("userObject"))
     );
-    loggedInUser.defaultStore.StoreName = selectedStoreName;
+
+    loggedInUser.defaultStore.StoreName = selectedStoreStringName;
     localStorage.setItem("userObject", JSON.stringify(loggedInUser));
 
     document.getElementById("selectedStoreNameInNavigation")!.innerHTML =
-      "(" + selectedStoreName + ")";
-  };
+      "(" + selectedStoreStringName + ")";
 
-  const storeOnChangeHandler = e => {
-    let selectedStoreStringName: string = e.target.value;
     setSelectedStoreName(selectedStoreStringName);
   };
 
   return (
     <Container element="div" className="changeStorePage">
       <Heading3>Change store!</Heading3>
-      <Form id="storeForm" onSubmit={handleFormSubmit}>
+      <Container id="storeFormContainer">
         <Select
           name="select-1"
           id="stores-list"
           options={dropdownStores}
-          onChange={storeOnChangeHandler}
           value={selectedStoreName}
           placeholder=""
         />
-        <br />
-        <br />
-        {selectedStoreName === undefined || selectedStoreName.length < 2 ? (
-          <FilledButton fullWidth disabled type="submit">
-            Change Store
-          </FilledButton>
-        ) : (
-          <FilledButton fullWidth type="submit">
-            Change Store
-          </FilledButton>
-        )}
-      </Form>
+      </Container>
     </Container>
   );
 };
