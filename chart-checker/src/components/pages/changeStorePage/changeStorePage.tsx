@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { Heading3 } from "@jsluna/typography";
 import { Container } from "@jsluna/grid";
-import { Select, Form } from "@jsluna/form";
-import { FilledButton } from "@jsluna/button";
+import { Select } from "@jsluna/form";
 import "./changeStorePage.css";
 
 type ChangeStorePagePropsType = {
@@ -37,6 +36,7 @@ const ChangeStorePage: FunctionComponent<ChangeStorePagePropsType> = props => {
       String(localStorage.getItem("userObject"))
     );
 
+    //Call API to get stores
     let loadedStores: Array<StoreType> = [
       {
         StoreCode: 2,
@@ -165,7 +165,6 @@ const ChangeStorePage: FunctionComponent<ChangeStorePagePropsType> = props => {
           name="select-1"
           id="stores-list"
           options={dropdownStores}
-          onChange={storeOnChangeHandler}
           value={selectedStoreName}
           placeholder=""
         />
