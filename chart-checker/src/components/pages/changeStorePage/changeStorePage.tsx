@@ -128,6 +128,7 @@ const ChangeStorePage: FunctionComponent<ChangeStorePagePropsType> = props => {
     const dropdownStores: Array<dropdownStoresType> = [];
     loadedStores.map((ls, i) => {
       dropdownStores.push({ label: ls.StoreName, value: ls.StoreName, key: i });
+      return ls;
     });
 
     dropdownStores.sort(function(a, b) {
@@ -167,10 +168,10 @@ const ChangeStorePage: FunctionComponent<ChangeStorePagePropsType> = props => {
           options={dropdownStores}
           onChange={storeOnChangeHandler}
           value={selectedStoreName}
+          placeholder=""
         />
         <br />
         <br />
-
         {selectedStoreName === undefined || selectedStoreName.length < 2 ? (
           <FilledButton fullWidth disabled type="submit">
             Change Store

@@ -6,9 +6,7 @@ import { Sainsburys } from "@jsluna/images";
 import { Container } from "@jsluna/grid";
 import { Text } from "@jsluna/typography";
 import { logout } from "../../utils/auth";
-import $ from "jquery";
 import "./navigation.css";
-import { isLVal } from "@babel/types";
 
 type NavigationProps = {};
 

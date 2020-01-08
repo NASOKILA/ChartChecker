@@ -20,11 +20,9 @@ const getHeaders = token => {
 export const PostFormValues = data =>
   getAccessToken()
     .then(token => {
-      debugger;
       return axios().post("/files", data, getHeaders(token));
     })
     .catch(error => {
-      debugger;
       throw error;
     });
 

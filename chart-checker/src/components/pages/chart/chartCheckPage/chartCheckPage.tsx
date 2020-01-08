@@ -5,9 +5,8 @@ import { ListView } from "@jsluna/icons";
 import { Form, RadioButtonField } from "@jsluna/form";
 import { FilledButton } from "@jsluna/button";
 import * as backendApi from "../../../../api/backendApi";
-import axios from "axios";
+//import axios from "axios";
 import "./chartCheckPage.css";
-import { functionDeclaration } from "@babel/types";
 
 type ChartCheckPagePropsType = {
   history: any;
@@ -89,7 +88,6 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
         console.log(res);
       })
       .catch(err => {
-        debugger;
         console.log("Error");
         console.log(err);
       });
@@ -141,7 +139,7 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
       </Heading5>
       <Container element="div" className="formContainer">
         <Form
-          enctype="multipart/form-data"
+          encType="multipart/form-data"
           element="form"
           className="chartCheckerForm"
           onSubmit={handleFormSubmit}
