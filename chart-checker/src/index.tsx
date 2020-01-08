@@ -26,11 +26,16 @@ const handleLogin = () => {
   }
 };
 
-const getApiHost = () => {
-  return process.env.NODE_ENV === "production"
-    ? `https://${window.location.host}/intervention` //URL OF THE DEPLOYED API
-    : "http://localhost:53452"; //URL OF THE LOCAL API
-};
+// const getApiHost = () => {
+//   return process.env.NODE_ENV === "production"
+//     ? `https://${window.location.host}/intervention` //URL OF THE DEPLOYED API
+//     : "http://localhost:53452"; //URL OF THE LOCAL API
+// };
+
+// const unauthorizedPageUrl =
+//   process.env.NODE_ENV === "production"
+//     ? "/chartChecker/unauthorized" //PRODUCTION unauthorized URL
+//     : "/unauthorized"; //LOCAL unauthorized URL
 
 (() => {
   if (msal.isCallback(window.location.hash)) {
@@ -38,11 +43,6 @@ const getApiHost = () => {
   }
 
   const loggedInUserMSAL = msal.getUser();
-
-  const unauthorizedPageUrl =
-    process.env.NODE_ENV === "production"
-      ? "/chartChecker/unauthorized" //PRODUCTION unauthorized URL
-      : "/unauthorized"; //LOCAL unauthorized URL
 
   if (!loggedInUserMSAL) {
     handleLogin();

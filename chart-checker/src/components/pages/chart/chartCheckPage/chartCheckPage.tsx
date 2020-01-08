@@ -57,33 +57,11 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
 
     const data2 = new FormData();
     data2.append("name", "Atanas");
-    const data3 = { Name: "Atanas" };
 
-    // fetch("https://localhost:5001/api/files", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify({
-    //     name: "yourValue"
-    //   })
-    // })
-    //   .then(res => {
-    //     debugger;
-    //     console.log("Success");
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     debugger;
-    //     console.log("Error");
-    //     console.log(err);
-    //   });
-
+    const data3 = { name: "Atanas" };
     backendApi
       .PostFormValues(data3)
       .then(res => {
-        debugger;
         console.log("Success");
         console.log(res);
       })
@@ -91,44 +69,6 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
         console.log("Error");
         console.log(err);
       });
-
-    // backendApi
-    //   .GetValues()
-    //   .then(res => {
-    //     debugger;
-    //     console.log("Success");
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     debugger;
-    //     console.log("Error");
-    //     console.log(err);
-    //   });
-
-    // axios
-    //   .get(`https://localhost:5001/api/files`)
-    //   .then(res => {
-    //     console.log("success");
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     console.log("error");
-    //     console.log(err);
-    //   });
-
-    // const data3 = { name: "Atanas" };
-    // axios
-    //   .post("https://localhost:5001/api/files", data3)
-    //   .then(res => {
-    //     // then print response status
-    //     console.log("upload success");
-    //     console.log(res);
-    //   })
-    //   .catch(err => {
-    //     // then print response status
-    //     console.log("upload fail");
-    //     console.log(err);
-    //   });
   };
 
   return (
@@ -173,7 +113,7 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
             name="chart-image"
             multiple
             onChange={e => onChangeHandler(e)}
-            // style={{ display: "block" }}
+            style={{ display: "none" }}
           />
         </Form>
       </Container>
