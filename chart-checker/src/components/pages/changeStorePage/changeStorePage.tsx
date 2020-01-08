@@ -141,27 +141,26 @@ const ChangeStorePage: FunctionComponent<ChangeStorePagePropsType> = props => {
     setSelectedStoreName(loggedInUser.defaultStore.StoreName);
   }, []);
 
-  const handleFormSubmit = e => {
-    e.preventDefault();
+  const storeOnChangeHandler = e => {
+    let selectedStoreStringName: string = e.target.value;
+
     const loggedInUser: any = JSON.parse(
       String(localStorage.getItem("userObject"))
     );
-    loggedInUser.defaultStore.StoreName = selectedStoreName;
+
+    loggedInUser.defaultStore.StoreName = selectedStoreStringName;
     localStorage.setItem("userObject", JSON.stringify(loggedInUser));
 
     document.getElementById("selectedStoreNameInNavigation")!.innerHTML =
-      "(" + selectedStoreName + ")";
-  };
+      "(" + selectedStoreStringName + ")";
 
-  const storeOnChangeHandler = e => {
-    let selectedStoreStringName: string = e.target.value;
     setSelectedStoreName(selectedStoreStringName);
   };
 
   return (
     <Container element="div" className="changeStorePage">
       <Heading3>Change store!</Heading3>
-      <Form id="storeForm" onSubmit={handleFormSubmit}>
+      <Container id="storeFormContainer">
         <Select
           name="select-1"
           id="stores-list"
@@ -170,18 +169,7 @@ const ChangeStorePage: FunctionComponent<ChangeStorePagePropsType> = props => {
           value={selectedStoreName}
           placeholder=""
         />
-        <br />
-        <br />
-        {selectedStoreName === undefined || selectedStoreName.length < 2 ? (
-          <FilledButton fullWidth disabled type="submit">
-            Change Store
-          </FilledButton>
-        ) : (
-          <FilledButton fullWidth type="submit">
-            Change Store
-          </FilledButton>
-        )}
-      </Form>
+      </Container>
     </Container>
   );
 };
