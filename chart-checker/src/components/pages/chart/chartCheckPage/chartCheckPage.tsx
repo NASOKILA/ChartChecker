@@ -5,7 +5,6 @@ import { ListView } from "@jsluna/icons";
 import { Form, RadioButtonField } from "@jsluna/form";
 import { FilledButton } from "@jsluna/button";
 import * as backendApi from "../../../../api/backendApi";
-//import axios from "axios";
 import "./chartCheckPage.css";
 
 type ChartCheckPagePropsType = {
@@ -16,13 +15,14 @@ type ChartCheckPagePropsType = {
 const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
   const [chartType, setChartType] = useState("");
   const [uploadError, setUploadError] = useState("");
+  const [imageName, setImageName] = useState("");
 
-  const handleFormSubmit = e => {
+  const handleFormSubmit: Function = (e: any) => {
     e.preventDefault();
     document.getElementById("file-input")!.click();
   };
 
-  const validateFile = event => {
+  const validateFile: Function = (event: any) => {
     let file = event.target.files[0];
     let size = 300000;
     let err = "";
@@ -43,24 +43,56 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
     return true;
   };
 
-  const onChangeHandler = event => {
+  const onChangeHandler: Function = (event: any) => {
     var file = event.target.files[0];
-    if (validateFile(event)) {
-      fileUploadHandler(file);
+    if (file !== undefined && file !== null) {
+      setImageName(file.name);
+
+      if (validateFile(event)) {
+        fileUploadHandler(file);
+      }
     }
   };
 
-  const fileUploadHandler = file => {
-    console.log("selectedFile uploaded");
-    const data = new FormData();
-    data.append("file", file); //try file!
+  const fileUploadHandler: Function = (file: any) => {
+    // const data2 = new FormData();
+    // data2.append("file", file); //try file!
 
-    const data2 = new FormData();
-    data2.append("name", "Atanas");
+    saveImageToServer(file);
+  };
 
-    const data3 = { name: "Atanas" };
+  const saveImageToServer: Function = (file: any) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
     backendApi
-      .PostFormValues(data3)
+      .UploadImage(formData)
+      .then(res => {
+        debugger;
+        console.log("Success");
+        console.log(res);
+        saveEventToDatabase(res.data.imagePath);
+      })
+      .catch(err => {
+        debugger;
+        console.log("Error");
+        console.log(err);
+      });
+  };
+
+  const saveEventToDatabase: Function = (imagePath: string) => {
+    const loggedInUser: any = JSON.parse(
+      String(localStorage.getItem("userObject"))
+    );
+    const data = {
+      UserEmail: loggedInUser.displayableId,
+      StoreName: loggedInUser.defaultStore.StoreName,
+      ChartType: chartType,
+      ImagePath: imagePath,
+      EventDateTime: new Date()
+    };
+    backendApi
+      .PostFormValues(data)
       .then(res => {
         console.log("Success");
         console.log(res);
@@ -92,7 +124,8 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
             className="radioButtonField"
             fullWidth
             options={[
-              { value: "music", label: "Music" },
+              { value: "artist", label: "Artist" },
+              { value: "songs", label: "Songs" },
               { value: "films", label: "Films" },
               { value: "games", label: "Games" },
               { value: "books", label: "Books" }
@@ -107,6 +140,7 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
               Upload image of your chart
             </FilledButton>
           )}
+          <Container className="ImageNameContainer">{imageName}</Container>
           <input
             id="file-input"
             type="file"
