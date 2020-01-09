@@ -165,6 +165,7 @@ const ChangeStorePage: FunctionComponent<ChangeStorePagePropsType> = props => {
           name="select-1"
           id="stores-list"
           options={dropdownStores}
+          onChange={storeOnChangeHandler}
           value={selectedStoreName}
           placeholder=""
         />

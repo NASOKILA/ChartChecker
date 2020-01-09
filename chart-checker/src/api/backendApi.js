@@ -17,6 +17,15 @@ const getHeaders = token => {
   };
 };
 
+const getFileHeaders = token => {
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      ContentType: "multipart/form-data"
+    }
+  };
+};
+
 export const PostFormValues = data =>
   getAccessToken()
     .then(token => {
@@ -34,5 +43,14 @@ export const GetValues = () =>
     })
     .catch(error => {
       debugger;
+      throw error;
+    });
+
+export const UploadImage = data =>
+  getAccessToken()
+    .then(token => {
+      return axios().post("/files/uploadimage", data, getFileHeaders(token));
+    })
+    .catch(error => {
       throw error;
     });
