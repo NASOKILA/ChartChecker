@@ -150,8 +150,7 @@ const Navigation: FunctionComponent = (props: NavigationProps) => {
       }
       menuItems={[
         <Link to="/">Home</Link>,
-        <Link to="/chart/check">Check a chart</Link>,
-        <Link to="/chart/change">Change a chart</Link>
+        <Link to="/chart/check">Check a chart</Link>
         // <Link to="/chart/success">Chart Success</Link>,
         // <Link to="/chart/error">Chart Error</Link>,
         // <Link to="/chart/loading">Chart Loading</Link>,

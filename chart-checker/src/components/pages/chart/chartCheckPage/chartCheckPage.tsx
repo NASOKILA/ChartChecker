@@ -16,6 +16,7 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
   const [chartType, setChartType] = useState("");
   const [uploadError, setUploadError] = useState("");
   const [imageName, setImageName] = useState("");
+  const [pageLoading, setpageLoading] = useState("");
 
   const handleFormSubmit: Function = (e: any) => {
     e.preventDefault();
@@ -55,9 +56,6 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
   };
 
   const fileUploadHandler: Function = (file: any) => {
-    // const data2 = new FormData();
-    // data2.append("file", file); //try file!
-
     saveImageToServer(file);
   };
 
@@ -68,13 +66,11 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
     backendApi
       .UploadImage(formData)
       .then(res => {
-        debugger;
         console.log("Success");
         console.log(res);
         saveEventToDatabase(res.data.imagePath);
       })
       .catch(err => {
-        debugger;
         console.log("Error");
         console.log(err);
       });
