@@ -97,20 +97,22 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
     backendApi
       .PostFormValues(data)
       .then((res: any) => {
-        setpageLoading(false);
-        if (res.data.success) {
-          //Redirect to success page
-          props.history.push("/chart/success");
-        } else {
-          //Redirect to error page
-          localStorage.setItem(
-            "chartErrorsList",
-            JSON.stringify(res.data.chartErrorsList)
-          );
-          localStorage.setItem("chartType", chartType);
+        setTimeout(() => {
+          setpageLoading(false);
+          if (res.data.success) {
+            //Redirect to success page
+            props.history.push("/chart/success");
+          } else {
+            //Redirect to error page
+            localStorage.setItem(
+              "chartErrorsList",
+              JSON.stringify(res.data.chartErrorsList)
+            );
+            localStorage.setItem("chartType", chartType);
 
-          props.history.push("/chart/error");
-        }
+            props.history.push("/chart/error");
+          }
+        }, 7000);
       })
       .catch(err => {
         console.log("Error");
@@ -151,7 +153,7 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
               fullWidth
               options={[
                 { value: "artists", label: "Artists" },
-                { value: "tracks", label: "Tracks" },
+                { value: "singles", label: "Singles" },
                 { value: "films", label: "Films" },
                 { value: "games", label: "Games" },
                 { value: "books", label: "Books" }
