@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Heading1, Heading3, Text } from "@jsluna/typography";
 import { Container } from "@jsluna/grid";
-import { IconButton } from "@jsluna/button";
+import { IconButton, OutlinedButton } from "@jsluna/button";
 import { ArrowLeft, ErrorCircle } from "@jsluna/icons";
 import Product from "../../../product/product";
 import "./chartErrorPage.css";
@@ -12,15 +12,15 @@ type ChartErrorPagePropsType = {
 };
 
 type ProductType = {
-  type: string;
-  title: string;
-  oldPosition: string;
+  name: string;
+  artist: string;
+  currentPosition: string;
   newPosition: string;
-  change: string;
 };
 
 type ChartErrorPageStateType = {
   products: ProductType[];
+  chartType: string;
 };
 
 class ChartErrorPage extends Component<
@@ -31,7 +31,8 @@ class ChartErrorPage extends Component<
     super(props);
 
     this.state = {
-      products: []
+      products: [],
+      chartType: ""
     };
   }
 
@@ -40,53 +41,30 @@ class ChartErrorPage extends Component<
 
   // After the component did mount, we set the state each second.
   componentDidMount() {
+    const chartErrorList: string = String(
+      localStorage.getItem("chartErrorsList")
+    );
+
+    const chartTypeString: string = String(localStorage.getItem("chartType"));
+
+    const chartErrorListObject: ProductType[] = JSON.parse(chartErrorList);
+
+    //Populate the state
+
     let dummyData: ProductType[] = [];
 
-    let product1: ProductType = {
-      type: "DVD",
-      title: "Paddington 2",
-      newPosition: "New 1",
-      change: "",
-      oldPosition: ""
-    };
+    for (let i = 0; i < chartErrorListObject.length; i++) {
+      const chartError = chartErrorListObject[i];
+      let product: ProductType = {
+        name: chartError.name,
+        artist: chartError.artist,
+        currentPosition: chartError.currentPosition,
+        newPosition: chartError.newPosition
+      };
+      dummyData.push(product);
+    }
 
-    let product2: ProductType = {
-      type: "DVD",
-      title: "Murder on the Orient Express",
-      newPosition: "New 8",
-      change: "Down 7",
-      oldPosition: "New 1"
-    };
-
-    let product3: ProductType = {
-      type: "DVD",
-      title: "Murder on the Orient Express",
-      newPosition: "New 9",
-      change: "Down 8",
-      oldPosition: "New 3"
-    };
-
-    let product4: ProductType = {
-      type: "DVD",
-      title: "Complete Paddington (box set)",
-      newPosition: "New 4",
-      change: "",
-      oldPosition: ""
-    };
-
-    dummyData.push(product1);
-    dummyData.push(product2);
-    dummyData.push(product3);
-    dummyData.push(product4);
-    dummyData.push({
-      type: "DVD",
-      title: "Only the Brave",
-      newPosition: "New 5",
-      change: "",
-      oldPosition: ""
-    });
-
-    this.setState({ products: dummyData });
+    this.setState({ products: dummyData, chartType: chartTypeString });
   }
 
   render() {
@@ -104,7 +82,9 @@ class ChartErrorPage extends Component<
             <ArrowLeft />
           </IconButton>
         </Container>
-        <Heading1>Here's how your chart is looking</Heading1>
+        <Heading1>
+          Here's how your {this.state.chartType} chart is looking
+        </Heading1>
         <ErrorCircle className="chartErrorPageWarning" />
         <Heading3>
           There's still a few movers and shakers in your chart
@@ -123,10 +103,17 @@ class ChartErrorPage extends Component<
               className="productsList"
               style={{ backgroundColor: backgroundColor }}
             >
-              <Product product={product} />
+              <Product chartType={this.state.chartType} product={product} />
             </Container>
           );
         })}
+
+        <OutlinedButton
+          className="mainPageChangeYourChartsBtn"
+          onClick={() => this.props.history.push("/chart/check")}
+        >
+          Change your charts
+        </OutlinedButton>
       </Container>
     );
   }

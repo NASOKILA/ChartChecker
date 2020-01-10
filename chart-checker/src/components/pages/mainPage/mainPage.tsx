@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FilledButton, OutlinedButton } from "@jsluna/button";
+import { FilledButton } from "@jsluna/button";
 import { Container } from "@jsluna/grid";
 import { Heading3, Heading5 } from "@jsluna/typography";
 import charticon from "../../../images/charticon.svg";
@@ -53,12 +53,12 @@ class MainPage extends Component<MainPagePropsType, MainPageStateType> {
         </FilledButton>
         <Container element="br" />
 
-        <OutlinedButton
+        {/* <OutlinedButton
           className="mainPageChangeYourChartsBtn"
           onClick={() => this.props.history.push("/chart/change")}
         >
           Change your charts
-        </OutlinedButton>
+        </OutlinedButton> */}
       </Container>
     );
   }
