@@ -107,7 +107,8 @@ class ChartErrorPage extends Component<
             </Container>
           );
         })}
-
+        <br />
+        <br />
         <OutlinedButton
           className="mainPageChangeYourChartsBtn"
           onClick={() => this.props.history.push("/chart/check")}

@@ -71,7 +71,7 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
       .then((res: any) => {
         console.log("Success");
         console.log(res);
-        saveEventToDatabase(res.data.imagePath);
+        saveEventToDatabase(res.data.imagePath, res.data.imageName);
       })
       .catch(err => {
         console.log("Error");
@@ -79,7 +79,10 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
       });
   };
 
-  const saveEventToDatabase: Function = (imagePath: string) => {
+  const saveEventToDatabase: Function = (
+    imagePath: string,
+    imageName: string
+  ) => {
     const loggedInUser: any = JSON.parse(
       String(localStorage.getItem("userObject"))
     );
@@ -88,6 +91,7 @@ const ChartCheckPage: FunctionComponent<ChartCheckPagePropsType> = props => {
       StoreName: loggedInUser.defaultStore.StoreName,
       ChartType: chartType,
       ImagePath: imagePath,
+      ImageName: imageName,
       EventDateTime: new Date()
     };
     backendApi
