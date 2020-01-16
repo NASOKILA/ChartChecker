@@ -32,7 +32,13 @@ const ChartSuccessPage: FunctionComponent<ChartSuccessPagePropsType> = props => 
         Looks like your chart is all up to date and each product is in the
         correct chart number.
       </Text>
-      <FilledButton fullWidth className="chartSuccessPageHomeBtn">
+      <FilledButton
+        fullWidth
+        onClick={() => {
+          props.history.push("/main");
+        }}
+        className="chartSuccessPageHomeBtn"
+      >
         Home
       </FilledButton>
     </Container>

@@ -38,11 +38,9 @@ export const PostFormValues = data =>
 export const GetValues = () =>
   getAccessToken()
     .then(token => {
-      debugger;
       return axios().get("/files");
     })
     .catch(error => {
-      debugger;
       throw error;
     });
 
