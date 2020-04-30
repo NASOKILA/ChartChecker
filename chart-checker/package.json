@@ -27,7 +27,7 @@
     "axios": "^0.19.1",
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "luna-react": "https://cdn.luna.js-devops.co.uk/pkg/luna-react/v3.35.4.tgz",
     "luna-style": "https://cdn.luna.js-devops.co.uk/pkg/luna-style/v2.30.2.tgz",
     "msal": "^0.2.4",
